@@ -4,19 +4,22 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import android.widget.VideoView
+import androidx.cardview.widget.CardView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 
 class Video_adapter(var videolist: ArrayList<String>):RecyclerView.Adapter<Video_adapter.ViewHolder>(){
 
-    class ViewHolder(view: View):RecyclerView.ViewHolder(view){
+    class ViewHolder(view: CardView):RecyclerView.ViewHolder(view){
         val video:VideoView = view.findViewById(R.id.video)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.video_view,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.video_view,parent,false) as CardView
+        Toast.makeText(parent.context,"createviewholder working",Toast.LENGTH_LONG).show()
         return ViewHolder(view)
     }
 

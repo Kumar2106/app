@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var recycleradpter:Video_adapter
-    val queue = Volley.newRequestQueue(this)
+
     val url = "https://raw.githubusercontent.com/bikashthapa01/myvideos-android-app/master/data.json"
     var videolist: ArrayList<String> = ArrayList<String>()
 
@@ -31,8 +32,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         toolbar = findViewById(R.id.toolbar)
+        recyclerView = findViewById(R.id.recycler_view)
 
+        layoutManager = LinearLayoutManager(this)
+        recycleradpter = Video_adapter(videolist)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = recycleradpter
 
+        val queue = Volley.newRequestQueue(this)
         //volley request
         val request = JsonObjectRequest(Request.Method.GET,url,null,Response.Listener<JSONObject>{ response ->
           try {
@@ -44,7 +51,9 @@ class MainActivity : AppCompatActivity() {
                       val video = videos.getJSONObject(i)
                       val source = video.getString("sources")
                       videolist.add(source)
+                      Toast.makeText(this,"Json request working",Toast.LENGTH_LONG).show()
                   }
+                  Log.i("videolist",videolist.toString())
               }
 
           }
@@ -63,11 +72,9 @@ class MainActivity : AppCompatActivity() {
 
         queue.add(request)
 
-        recyclerView = findViewById(R.id.recycler_view)
-        layoutManager = LinearLayoutManager(this)
-        recycleradpter = Video_adapter(videolist)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = recycleradpter
+        recycleradpter.notifyDataSetChanged()
+
+
 
     }
 
