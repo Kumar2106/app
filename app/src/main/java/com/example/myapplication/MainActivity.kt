@@ -37,14 +37,12 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         videolist = ArrayList()
         recycleradpter = Video_adapter(videolist)
-        getJson()
-        recycleradpter.notifyDataSetChanged()
 
         Log.i("Video_list",videolist.size.toString())
 
         Log.i("Video_list",videolist.size.toString())
         recyclerView.adapter = recycleradpter
-
+        getJson()
 
     }
     fun getJson(){
@@ -59,12 +57,14 @@ class MainActivity : AppCompatActivity() {
                     val videos = category.getJSONArray("videos")
                     for (i in 0 until videos.length()){
                         val video = videos.getJSONObject(i)
-                        val source = video.getString("sources")
-                        videolist.add(source)
-                        Log.i("Url",source)
+                        val source = video.getJSONArray("sources")
+                        videolist.add(source.getString(0))
+                        Log.i("Url",source.getString(0))
                         Toast.makeText(this,"Json request working",Toast.LENGTH_LONG).show()
                     }
                 }
+
+                recycleradpter.notifyDataSetChanged()
 
             }
             catch (e:JSONException){
