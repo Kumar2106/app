@@ -17,8 +17,6 @@ class Video_adapter(var videolist: ArrayList<String>):RecyclerView.Adapter<Video
 
     class ViewHolder(view: CardView):RecyclerView.ViewHolder(view){
         val video:VideoView = view.findViewById(R.id.video)
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,7 +27,6 @@ class Video_adapter(var videolist: ArrayList<String>):RecyclerView.Adapter<Video
 
     override fun getItemCount(): Int {
        return videolist.size
-        Log.i("Video_list1",videolist.size.toString())
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
