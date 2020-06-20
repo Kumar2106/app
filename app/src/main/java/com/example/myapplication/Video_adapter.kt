@@ -32,11 +32,7 @@ class Video_adapter(var videolist: ArrayList<String>):RecyclerView.Adapter<Video
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var video = videolist[position]
         holder.video.setVideoURI(video.toUri())
-        holder.video.setOnTouchListener( View.OnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_DOWN){
-                holder.video.start()
-            }
-            true
-        })
+        holder.video.start()
+
     }
 }

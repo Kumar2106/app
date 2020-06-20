@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         Log.i("Video_list",videolist.size.toString())
 
         Log.i("Video_list",videolist.size.toString())
+        val snapHelper = LinearSnapHelper() // Or PagerSnapHelper
+        snapHelper.attachToRecyclerView(recyclerView)
         recyclerView.adapter = recycleradpter
         getJson()
 
@@ -59,8 +63,8 @@ class MainActivity : AppCompatActivity() {
                         val video = videos.getJSONObject(i)
                         val source = video.getJSONArray("sources")
                         videolist.add(source.getString(0))
-                        Log.i("Url",source.getString(0))
-                        Toast.makeText(this,"Json request working",Toast.LENGTH_LONG).show()
+
+
                     }
                 }
 

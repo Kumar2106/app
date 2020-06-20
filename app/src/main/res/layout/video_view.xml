@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <VideoView
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+    <VideoView
+android:layout_weight="9"
         android:id="@+id/video"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp" />
+
+        <TextView
+            android:layout_margin="10dp"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+
+            android:text="Leaves Of Delhi Government Hospitals' Staff Cancelled As COVID Cases Rise "
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+    </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>
