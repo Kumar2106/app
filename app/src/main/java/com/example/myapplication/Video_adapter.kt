@@ -11,8 +11,9 @@ import android.widget.VideoView
 import androidx.cardview.widget.CardView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.model.VideoDetails
 
-class Video_adapter(var videolist: ArrayList<String>):RecyclerView.Adapter<Video_adapter.ViewHolder>(){
+class Video_adapter(var videolist: ArrayList<VideoDetails>):RecyclerView.Adapter<Video_adapter.ViewHolder>(){
 
 
     class ViewHolder(view: CardView):RecyclerView.ViewHolder(view){
@@ -31,7 +32,7 @@ class Video_adapter(var videolist: ArrayList<String>):RecyclerView.Adapter<Video
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var video = videolist[position]
-        holder.video.setVideoURI(video.toUri())
+        holder.video.setVideoURI(video.videoUrl.toUri())
         holder.video.start()
 
     }
