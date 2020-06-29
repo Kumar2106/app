@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.cardview.widget.CardView
@@ -18,6 +19,7 @@ class Video_adapter(var videolist: ArrayList<VideoDetails>):RecyclerView.Adapter
 
     class ViewHolder(view: CardView):RecyclerView.ViewHolder(view){
         val video:VideoView = view.findViewById(R.id.video)
+        val textView:TextView = view.findViewById(R.id.video_text)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,9 +33,10 @@ class Video_adapter(var videolist: ArrayList<VideoDetails>):RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var video = videolist[position]
+        val video = videolist[position]
         holder.video.setVideoURI(video.videoUrl.toUri())
         holder.video.start()
+        holder.textView.text = video.headline
 
     }
 }

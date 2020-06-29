@@ -62,8 +62,8 @@ class MainActivity : AppCompatActivity() {
             try {
                for(i in 0 until response.length()){
                    val video = response.getJSONObject(i)
-                   videolist.add(VideoDetails(video.getString("createdDate") as Date,
-                       video.getString("lastModifiedDate") as Date,
+                   videolist.add(VideoDetails(video.getString("createdDate") ,
+                       video.getString("lastModifiedDate") ,
                        video.getInt("videoId"),
                        video.getString("headline"),
                        video.getString("videoUrl")
