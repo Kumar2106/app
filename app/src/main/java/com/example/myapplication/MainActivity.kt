@@ -1,10 +1,16 @@
 package com.example.myapplication
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var recycleradpter:Video_adapter
     lateinit var videolist: ArrayList<VideoDetails>
+    lateinit var notificationManager: NotificationManager
 
 
 
@@ -52,6 +59,12 @@ class MainActivity : AppCompatActivity() {
         snapHelper.attachToRecyclerView(recyclerView)
         recyclerView.adapter = recycleradpter
         getJson()
+        notification()
+
+
+
+
+
 
     }
     fun getJson(){
@@ -89,6 +102,28 @@ class MainActivity : AppCompatActivity() {
         Log.i("Video_list",videolist.size.toString())
 
         queue.add(request)
+    }
+
+    fun notification(){
+        var builder = NotificationCompat.Builder(this,"MyApp")
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle("HI")
+            .setContentText("Our notification text")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            Log.i("Notification Channel","Notification channel is working")
+
+            val channel = NotificationChannel("MyApp", "MyApp", NotificationManager.IMPORTANCE_DEFAULT)
+            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+
+        notificationManager.notify(1,builder.build())
+        Log.i("Notificatio","Notification is working")
+
     }
 
 
